@@ -37,11 +37,14 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: flex-start;
 }
 
 /* === LAYOUT === */
@@ -220,7 +223,8 @@ body {
 /* === MAIN CONTENT === */
 .main {
   flex: 1;
-  padding: 1.5rem;
+  min-width: 0;
+  padding: 1.5rem 1.5rem 6rem;
   overflow-y: auto;
   max-height: 100vh;
 }
@@ -302,6 +306,21 @@ body {
   border-color: var(--border-card-hover);
   box-shadow: var(--shadow-glass);
 }
+
+/* === Acentos de color por tarjeta === */
+.card-promedios { border-top: 3px solid #60a5fa; background: linear-gradient(180deg, rgba(96,165,250,.12), var(--bg-card) 45%); }
+.card-viento { border-top: 3px solid #38bdf8; background: linear-gradient(180deg, rgba(56,189,248,.12), var(--bg-card) 45%); }
+.card-estado { border-top: 3px solid #a78bfa; background: linear-gradient(180deg, rgba(167,139,250,.12), var(--bg-card) 45%); }
+.card-luna { border-top: 3px solid #e2e8f0; background: linear-gradient(180deg, rgba(226,232,240,.10), var(--bg-card) 45%); }
+.card-amanecer { border-top: 3px solid #fb923c; background: linear-gradient(180deg, rgba(251,146,60,.14), var(--bg-card) 45%); }
+.card-hoy { border-top: 3px solid #fbbf24; background: linear-gradient(180deg, rgba(251,191,36,.10), var(--bg-card) 45%); }
+.card-mapa { border-top: 3px solid #34d399; background: linear-gradient(180deg, rgba(52,211,153,.12), var(--bg-card) 45%); }
+.card-uv { border-top: 3px solid #f472b6; background: linear-gradient(180deg, rgba(244,114,182,.12), var(--bg-card) 45%); }
+.card-sensacion { border-top: 3px solid #fb7185; background: linear-gradient(180deg, rgba(251,113,133,.12), var(--bg-card) 45%); }
+.card-precip { border-top: 3px solid #60a5fa; background: linear-gradient(180deg, rgba(96,165,250,.14), var(--bg-card) 45%); }
+.card-visibilidad { border-top: 3px solid #a3e635; background: linear-gradient(180deg, rgba(163,230,53,.10), var(--bg-card) 45%); }
+.card-humedad { border-top: 3px solid #22d3ee; background: linear-gradient(180deg, rgba(34,211,238,.12), var(--bg-card) 45%); }
+.card-presion { border-top: 3px solid #c084fc; background: linear-gradient(180deg, rgba(192,132,252,.12), var(--bg-card) 45%); }
 
 .card-label {
   font-size: 0.65rem;
@@ -793,10 +812,10 @@ body {
 }
 
 .extended-data {
-  margin: 2rem 0;
+  margin: 1.5rem 0 0;
   display: block;
-  z-index: 100;
-  padding-bottom: 4rem;
+  z-index: 1;
+  padding-bottom: 1rem;
 }
 
 .extended-card {
@@ -863,6 +882,13 @@ body {
 }
 
 /* === HOURLY TABLE === */
+.hourly-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  background: rgba(255,255,255,.02);
+}
+
 .hourly-table {
   width: 100%;
   border-collapse: collapse;
@@ -914,13 +940,55 @@ body {
 }
 
 .tbl-icon {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  align-items: center;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 .tbl-icon svg {
   width: 24px;
   height: 24px;
+}
+
+.tbl-label {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* === HOURLY SCROLL (tarjetas 24h) === */
+.hourly-scroll {
+  overflow-x: auto;
+  margin-top: 0.85rem;
+  padding-bottom: 0.4rem;
+  scrollbar-width: thin;
+}
+
+.hourly-track {
+  display: flex;
+  gap: 0.55rem;
+  width: max-content;
+  padding: 0.15rem;
+}
+
+.hourly-track .hourly-item {
+  background: linear-gradient(180deg, rgba(96,165,250,.14), rgba(255,255,255,.03));
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  min-width: 76px;
+  padding: 0.6rem 0.4rem;
+}
+
+.hourly-track .hourly-item.active {
+  background: linear-gradient(180deg, rgba(251,146,60,.22), rgba(96,165,250,.12));
+  border-color: rgba(251,146,60,.45);
+}
+
+.hourly-track .hourly-icon {
+  font-size: 1.6rem;
 }
 
 /* === HOURLY SCROLL === */
@@ -1037,8 +1105,9 @@ body {
 }
 
 .day-tab.active {
-  background: rgba(99, 102, 241, .12);
-  border-color: rgba(99, 102, 241, .4);
+  background: linear-gradient(180deg, rgba(251,146,60,.25), rgba(99, 102, 241, .18));
+  border-color: rgba(251, 146, 60, .5);
+  box-shadow: 0 4px 16px rgba(251,146,60,.15);
 }
 
 .day-tab-name {
@@ -1076,7 +1145,7 @@ body {
 }
 
 .forecast-day {
-  background: rgba(255,255,255,.03);
+  background: linear-gradient(180deg, rgba(96,165,250,.14), rgba(255,255,255,.03));
   border: 1px solid var(--border-card);
   border-radius: 12px;
   padding: .85rem .35rem;
@@ -1088,18 +1157,18 @@ body {
 }
 
 .forecast-day:hover {
-  background: rgba(255,255,255,.07);
+  background: linear-gradient(180deg, rgba(251,146,60,.18), rgba(255,255,255,.06));
   transform: translateY(-3px);
-  border-color: rgba(99, 102, 241, .25);
+  border-color: rgba(251, 146, 60, .35);
 }
 
 .forecast-day:first-child {
-  background: rgba(99, 102, 241, .1);
-  border-color: rgba(99, 102, 241, .3);
+  background: linear-gradient(180deg, rgba(251,146,60,.22), rgba(99, 102, 241, .14));
+  border-color: rgba(251, 146, 60, .45);
 }
 
 .forecast-day:first-child:hover {
-  background: rgba(99, 102, 241, .16);
+  background: linear-gradient(180deg, rgba(251,146,60,.3), rgba(99, 102, 241, .2));
 }
 
 .forecast-date {
@@ -1118,6 +1187,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .forecast-icon svg {
@@ -1288,6 +1359,7 @@ body {
 }
 
 @media (max-width: 768px) {
+  body { flex-direction: column; }
   .sidebar {
     width: 100%;
     min-width: 100%;
@@ -1299,7 +1371,8 @@ body {
   }
   .main {
     max-height: none;
-    padding: 1rem;
+    overflow-y: visible;
+    padding: 1rem 1rem 6rem;
   }
   .dashboard-grid {
     grid-template-columns: repeat(2, 1fr);

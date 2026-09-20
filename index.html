@@ -40,7 +40,7 @@
     </aside>
 
     <main class="main">
-        <div class="location-header">
+        <div class="location-header" id="inicio">
             <p class="location-label">CASA</p>
             <h1 class="location-city">Córdoba</h1>
             <p class="location-temp">24°</p>
@@ -48,7 +48,7 @@
             <p class="location-temps">Máxima: 27°&nbsp; Mínima: 14°</p>
         </div>
 
-        <div class="dashboard-grid">
+        <div class="dashboard-grid" id="sec-resumen">
             <!-- PROMEDIOS -->
             <section class="card card-promedios" aria-label="Promedios">
                 <p class="card-label">📊 PROMEDIOS</p>
@@ -340,12 +340,12 @@
                     <button class="footer-toggle" id="closeExtended" type="button">Ocultar</button>
                 </div>
 
-                <div class="extended-section">
+                <div class="extended-section" id="sec-chart">
                     <h3>🌡️ Temperatura - Próximas 24h</h3>
                     <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
                 </div>
 
-                <div class="extended-section">
+                <div class="extended-section" id="sec-horas">
                     <h3>⏰ Pronóstico por horas</h3>
                     <div class="hourly-table-wrap">
                         <table class="hourly-table">
@@ -370,7 +370,7 @@
                     </div>
                 </div>
 
-                <div class="extended-section">
+                <div class="extended-section" id="sec-dias">
                     <div class="extended-header-row">
                         <div>
                             <h3>📅 Pronóstico extendido hora por hora</h3>
@@ -401,7 +401,7 @@
                     </div>
                 </div>
 
-                <div class="extended-section">
+                <div class="extended-section" id="sec-5dias">
                     <h3>🗓️ Pronóstico 5 días</h3>
                     <div class="forecast-grid" id="forecastGrid"></div>
                 </div>
@@ -414,6 +414,14 @@
         <p>Doctor Pablo Luis Mirizzi 564, X5016 Córdoba, Córdoba</p>
         <button class="footer-toggle" id="toggleExtended" type="button">Mostrar datos extendidos</button>
     </footer>
+
+    <nav class="mobile-nav" aria-label="Navegación principal">
+        <a href="#inicio" class="mnav-link mnav-inicio"><span class="mnav-emoji">🏠</span><span class="mnav-txt">Inicio</span></a>
+        <a href="#sec-resumen" class="mnav-link mnav-panel"><span class="mnav-emoji">🎛️</span><span class="mnav-txt">Panel</span></a>
+        <a href="#sec-horas" class="mnav-link mnav-horas"><span class="mnav-emoji">⏰</span><span class="mnav-txt">Horas</span></a>
+        <a href="#sec-dias" class="mnav-link mnav-dias"><span class="mnav-emoji">📅</span><span class="mnav-txt">3 días</span></a>
+        <a href="#sec-5dias" class="mnav-link mnav-5dias"><span class="mnav-emoji">🗓️</span><span class="mnav-txt">5 días</span></a>
+    </nav>
 
     <script>
     (function () {
@@ -729,15 +737,15 @@
             tbody.innerHTML = indexes.map((i, k) => {
                 const info = wmoToSpanish(hourly.weather_code[i]);
                 return `<tr${k === 0 ? ' class="row-now"' : ''}>
-                    <td>${k === 0 ? '⚡ Ahora' : '🕐 ' + formatHour(hourly.time[i])}</td>
-                    <td><span class="tbl-icon">${info.icon}</span></td>
-                    <td style="color:${tempColor(hourly.temperature_2m[i])};font-weight:700">${Math.round(hourly.temperature_2m[i])}°</td>
-                    <td>${Math.round(hourly.apparent_temperature[i])}°</td>
-                    <td>💧 ${Math.round(hourly.relative_humidity_2m[i])}%</td>
-                    <td>💨 ${Math.round(hourly.wind_speed_10m[i])} km/h</td>
-                    <td>🌧️ ${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
-                    <td>☁️ ${Math.round(hourly.cloud_cover[i] || 0)}%</td>
-                    <td>${Math.round(hourly.pressure_msl[i])} hPa</td>
+                    <td data-label="Hora">${k === 0 ? '⚡ Ahora' : '🕐 ' + formatHour(hourly.time[i])}</td>
+                    <td data-label="Estado"><span class="tbl-icon">${info.icon}</span></td>
+                    <td data-label="Temp" style="color:${tempColor(hourly.temperature_2m[i])};font-weight:700">${Math.round(hourly.temperature_2m[i])}°</td>
+                    <td data-label="Sens">${Math.round(hourly.apparent_temperature[i])}°</td>
+                    <td data-label="Hum">💧 ${Math.round(hourly.relative_humidity_2m[i])}%</td>
+                    <td data-label="Viento">💨 ${Math.round(hourly.wind_speed_10m[i])} km/h</td>
+                    <td data-label="Lluvia">🌧️ ${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
+                    <td data-label="Nubes">☁️ ${Math.round(hourly.cloud_cover[i] || 0)}%</td>
+                    <td data-label="Pres">${Math.round(hourly.pressure_msl[i])} hPa</td>
                 </tr>`;
             }).join('');
         }
@@ -804,16 +812,16 @@
             tbody.innerHTML = dayHours.map(({ i }) => {
                 const info = wmoToSpanish(hourly.weather_code[i]);
                 return `<tr>
-                    <td>🕐 ${formatHour(hourly.time[i])}</td>
-                    <td><span class="tbl-icon">${info.icon}</span><span class="tbl-label">${info.label}</span></td>
-                    <td style="color:${tempColor(hourly.temperature_2m[i])};font-weight:700">${Math.round(hourly.temperature_2m[i])}°</td>
-                    <td>${Math.round(hourly.apparent_temperature[i])}°</td>
-                    <td>💧 ${Math.round(hourly.relative_humidity_2m[i])}%</td>
-                    <td>💨 ${Math.round(hourly.wind_speed_10m[i])} km/h</td>
-                    <td>🌧️ ${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
-                    <td>${(hourly.precipitation?.[i] ?? 0).toFixed(1)} mm</td>
-                    <td>☁️ ${Math.round(hourly.cloud_cover[i] || 0)}%</td>
-                    <td>${Math.round(hourly.pressure_msl[i])} hPa</td>
+                    <td data-label="Hora">🕐 ${formatHour(hourly.time[i])}</td>
+                    <td data-label="Estado"><span class="tbl-icon">${info.icon}</span><span class="tbl-label">${info.label}</span></td>
+                    <td data-label="Temp" style="color:${tempColor(hourly.temperature_2m[i])};font-weight:700">${Math.round(hourly.temperature_2m[i])}°</td>
+                    <td data-label="Sens">${Math.round(hourly.apparent_temperature[i])}°</td>
+                    <td data-label="Hum">💧 ${Math.round(hourly.relative_humidity_2m[i])}%</td>
+                    <td data-label="Viento">💨 ${Math.round(hourly.wind_speed_10m[i])} km/h</td>
+                    <td data-label="Lluvia">🌧️ ${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
+                    <td data-label="Precip">${(hourly.precipitation?.[i] ?? 0).toFixed(1)} mm</td>
+                    <td data-label="Nubes">☁️ ${Math.round(hourly.cloud_cover[i] || 0)}%</td>
+                    <td data-label="Pres">${Math.round(hourly.pressure_msl[i])} hPa</td>
                 </tr>`;
             }).join('');
             if (status) status.textContent = `✅ ${formatDayLabel(date, selectedDay).name} · ${dayHours.length} horas · Open-Meteo`;
@@ -853,6 +861,39 @@
             }
         }
 
+        function bindMobileNav() {
+            const links = $$('.mobile-nav .mnav-link');
+            if (!links.length) return;
+            const section = $('#extendedData');
+            const toggle = $('#toggleExtended');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (!target) return;
+                    e.preventDefault();
+                    if (section && section.hidden && section.contains(target)) {
+                        section.hidden = false;
+                        if (toggle) toggle.textContent = '🔼 Ocultar datos extendidos';
+                    }
+                    links.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+            if (!('IntersectionObserver' in window)) return;
+            const spy = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const id = '#' + entry.target.id;
+                    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+                });
+            }, { rootMargin: '-30% 0px -55% 0px' });
+            ['inicio', 'sec-resumen', 'sec-chart', 'sec-horas', 'sec-dias', 'sec-5dias'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) spy.observe(el);
+            });
+        }
+
         window.__latestForecast = null;
         window.__latestDaily = null;
 
@@ -860,6 +901,7 @@
         bindSearch();
         bindNotification();
         bindExtendedToggle();
+        bindMobileNav();
         loadWeather('Córdoba');
     })();
     </script>

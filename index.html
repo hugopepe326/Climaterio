@@ -8,1028 +8,792 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="brand-center">
-                <div class="brand-icon">
-                    <svg width="42" height="42" viewBox="0 0 64 64" fill="none">
-                        <circle cx="32" cy="32" r="13" fill="#FFD700" class="sun-core"/>
-                        <g class="sun-rays">
-                            <line x1="32" y1="5" x2="32" y2="13" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="32" y1="51" x2="32" y2="59" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="5" y1="32" x2="13" y2="32" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="51" y1="32" x2="59" y2="32" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="12.8" y1="12.8" x2="18.8" y2="18.8" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="45.2" y1="45.2" x2="51.2" y2="51.2" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="12.8" y1="51.2" x2="18.8" y2="45.2" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                            <line x1="45.2" y1="18.8" x2="51.2" y2="12.8" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
-                        </g>
+    <aside class="sidebar">
+        <div class="sidebar-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar" />
+        </div>
+        <div class="sidebar-notification">
+            <div class="notif-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="notif-text">
+                <p class="notif-title">Agrega Clima a la barra de menús</p>
+                <p class="notif-desc">En Configuración del Sistema, puedes elegir que el clima del día se muestre siempre en la parte superior de la pantalla.</p>
+            </div>
+            <button class="notif-close">×</button>
+        </div>
+        <button class="notif-btn">Ir a Configuración del Sistema</button>
+        <div class="location-cards">
+            <section class="loc-card active" data-city="Córdoba">
+                <div class="loc-card-header">
+                    <div>
+                        <h3 class="loc-card-title">Córdoba</h3>
+                        <p class="loc-card-subtitle">Mi ubicación · Casa</p>
+                    </div>
+                    <p class="loc-card-temp">24°</p>
+                </div>
+                <p class="loc-card-condition">Mayormente despejado</p>
+                <p class="loc-card-temps">Máxima: 27°&nbsp; Mínima: 14°</p>
+            </section>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="location-header">
+            <p class="location-label">CASA</p>
+            <h1 class="location-city">Córdoba</h1>
+            <p class="location-temp">24°</p>
+            <p class="location-condition">Mayormente despejado</p>
+            <p class="location-temps">Máxima: 27°&nbsp; Mínima: 14°</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- PROMEDIOS -->
+            <section class="card card-promedios" aria-label="Promedios">
+                <p class="card-label">PROMEDIOS</p>
+                <p class="promedios-temp">+6°</p>
+                <p class="promedios-desc">por encima del máximo promedio diario</p>
+                <div class="promedios-detail">
+                    <span>Hoy Promedio</span>
+                    <span>Máx.:27° Mín.:21°</span>
+                </div>
+            </section>
+
+            <!-- VIENTO -->
+            <section class="card card-viento" aria-label="Viento">
+                <p class="card-label">VIENTO</p>
+                <div class="wind-gauge">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#60a5fa" stroke-width="4" stroke-dasharray="180 360" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                        <text x="50" y="48" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="700">18</text>
+                        <text x="50" y="60" text-anchor="middle" fill="#64748b" font-size="7">km/h</text>
+                    </svg>
+                    <div class="wind-dir">
+                        <span>N</span><span>E</span><span>S</span><span>O</span>
+                    </div>
+                </div>
+                <p class="card-label-small">Ráfagas: 31 km/h NE</p>
+            </section>
+
+            <!-- ESTADO DEL CLIMA -->
+            <section class="card card-estado" aria-label="Estado del clima">
+                <div class="estado-header">
+                    <div>
+                        <p class="card-title">Estado del clima</p>
+                        <p class="card-subtitle">Temperatura (°C)</p>
+                    </div>
+                    <div class="estado-icons">
+                        <span class="estado-icon active">☁</span>
+                        <span class="estado-icon">💧</span>
+                        <span class="estado-icon">☂</span>
+                    </div>
+                </div>
+                <div class="hourly-forecast">
+                    <div class="hourly-item">
+                        <span class="hourly-time">Ahora</span>
+                        <span class="hourly-icon">☀</span>
+                        <span class="hourly-temp">24°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">8 P.M.</span>
+                        <span class="hourly-icon">☾</span>
+                        <span class="hourly-temp">23°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">9 P.M.</span>
+                        <span class="hourly-icon">☾</span>
+                        <span class="hourly-temp">21°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">10 P.M.</span>
+                        <span class="hourly-icon">⛅</span>
+                        <span class="hourly-temp">20°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">11 P.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">20°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">12 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">19°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">1 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">19°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">2 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">19°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">3 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">18°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">4 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">17°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">5 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">17°</span>
+                    </div>
+                    <div class="hourly-item">
+                        <span class="hourly-time">6 A.M.</span>
+                        <span class="hourly-icon">☁</span>
+                        <span class="hourly-temp">16°</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LUNA -->
+            <section class="card card-luna" aria-label="Fase Lunar">
+                <p class="card-label">LUNA GIBOSA CRECIENTE</p>
+                <div class="moon-visual">
+                    <div class="moon"></div>
+                </div>
+                <p class="card-label-small">Luna ↓: 3:26 A.M.</p>
+            </section>
+
+            <!-- AMANECER -->
+            <section class="card card-amanecer" aria-label="Amanecer">
+                <p class="card-label">AMANECER</p>
+                <p class="amanecer-time">7:08 A.M.</p>
+                <div class="sun-arc">
+                    <svg viewBox="0 0 120 40" width="100%" height="40">
+                        <path d="M 10 35 Q 60 -5 110 35" fill="none" stroke="#fb923c" stroke-width="2" opacity="0.6"/>
+                        <circle cx="60" cy="8" r="3" fill="#fb923c"/>
                     </svg>
                 </div>
-                <div class="brand-text">
-                    <h1 class="title">FedeWeather</h1>
-                    <p class="brand-subtitle">Córdoba, Argentina</p>
+                <p class="card-label-small">Atardecer: 7:12 P.M.</p>
+            </section>
+
+            <!-- HOY -->
+            <section class="card card-hoy" aria-label="Hoy">
+                <p class="card-title">Hoy</p>
+                <div class="hoy-table">
+                    <div class="hoy-row">
+                        <span class="hoy-day">Hoy</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">14°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:55%"></div></div>
+                        <span class="hoy-temp-high">27°</span>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Dom</span>
+                        <span class="hoy-icon">☁</span>
+                        <span class="hoy-temp-low">15°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:70%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Lun</span>
+                        <span class="hoy-icon">⛅</span>
+                        <span class="hoy-temp-low">11°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:40%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Mar</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">6°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:30%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Mié</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">9°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:45%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Jue</span>
+                        <span class="hoy-icon">☁</span>
+                        <span class="hoy-temp-low">13°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:60%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Vie</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">15°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:50%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Sáb</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">11°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:42%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Dom</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">16°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:55%"></div></div>
+                    </div>
+                    <div class="hoy-row">
+                        <span class="hoy-day">Lun</span>
+                        <span class="hoy-icon">☀</span>
+                        <span class="hoy-temp-low">14°</span>
+                        <div class="hoy-bar"><div class="hoy-bar-fill" style="width:48%"></div></div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- MAPA DE VIENTO -->
+            <section class="card card-mapa" aria-label="Mapa de viento">
+                <p class="card-label">MAPA DE VIENTO</p>
+                <div class="map-visual">
+                    <div class="map-overlay">
+                        <div class="map-marker" style="top:20%;left:15%"></div>
+                        <div class="map-marker active" style="top:50%;left:50%">18</div>
+                        <div class="map-marker" style="top:70%;left:30%"></div>
+                        <div class="map-marker" style="top:60%;left:75%"></div>
+                        <div class="map-marker" style="top:35%;left:85%"></div>
+                    </div>
+                    <svg class="map-lines" viewBox="0 0 200 150" width="100%" height="100%">
+                        <path d="M 20 40 Q 60 20 100 50 T 180 30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                        <path d="M 10 80 Q 50 60 90 90 T 170 70" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+                        <path d="M 30 110 Q 70 90 110 120 T 190 100" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+                        <path d="M 50 10 Q 90 30 130 15 T 190 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- INDICE UV -->
+            <section class="card card-uv" aria-label="Índice UV">
+                <p class="card-label">ÍNDICE UV</p>
+                <p class="uv-value">0</p>
+                <p class="uv-status">Bajo</p>
+                <div class="uv-bar"><div class="uv-bar-fill" style="width:0%"></div></div>
+                <p class="card-label-small">Bajo el resto del día.</p>
+            </section>
+
+            <!-- SENSACIÓN -->
+            <section class="card card-sensacion" aria-label="Sensación">
+                <p class="card-label">SENSACIÓN</p>
+                <p class="sensacion-temp">21°</p>
+                <p class="card-label-small">Más fría debido al viento.</p>
+            </section>
+
+            <!-- PRECIPITACIÓN -->
+            <section class="card card-precip" aria-label="Precipitación">
+                <p class="card-label">PRECIPITACIÓN</p>
+                <p class="precip-value">0 mm</p>
+                <p class="card-label-small">Hoy</p>
+                <p class="card-label-small">Pronóstico: <1 mm mañana.</p>
+            </section>
+
+            <!-- VISIBILIDAD -->
+            <section class="card card-visibilidad" aria-label="Visibilidad">
+                <p class="card-label">VISIBILIDAD</p>
+                <p class="visibilidad-value">32 km</p>
+                <p class="card-label-small">Vista completamente despejada.</p>
+            </section>
+
+            <!-- HUMEDAD -->
+            <section class="card card-humedad" aria-label="Humedad">
+                <p class="card-label">HUMEDAD</p>
+                <p class="humedad-value">54%</p>
+                <p class="card-label-small">El punto de rocío actual es de 14°.</p>
+            </section>
+
+            <!-- PRESIÓN -->
+            <section class="card card-presion" aria-label="Presión">
+                <p class="card-label">PRESIÓN</p>
+                <div class="presion-gauge">
+                    <svg viewBox="0 0 80 80" width="60" height="60">
+                        <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                        <circle cx="40" cy="40" r="35" fill="none" stroke="#60a5fa" stroke-width="4" stroke-dasharray="160 220" stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                    </svg>
+                    <div class="presion-center">
+                        <span class="presion-value">1.004</span>
+                        <span class="presion-unit">hPa</span>
+                    </div>
+                </div>
+                <div class="presion-labels">
+                    <span>Baja</span><span>Alta</span>
+                </div>
+            </section>
         </div>
-    </header>
-    
-    <main class="container main">
-
-        <section class="alerts-section" id="alertsSection" aria-label="Alertas Meteorológicas">
-            <div class="alerts-list" id="alertsList"></div>
-        </section>
-
-        <section class="card current-card" aria-label="Clima Actual">
-            <div class="current-header">
-                <div>
-                    <h2 class="card-title">Clima Actual</h2>
-                    <p class="city-name" id="cityName">Córdoba, Argentina</p>
-                </div>
-                <div class="date-time" id="dateTime"></div>
-            </div>
-            
-            <div class="clima-grid">
-                <div class="icon-wrap">
-                    <div class="icon-container" id="iconContainer">
-                        <div class="cloud cloud-1">
-                            <svg viewBox="0 0 100 60" width="100%" height="100%">
-                                <ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/>
-                                <ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/>
-                                <ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/>
-                                <ellipse cx="45" cy="20" rx="14" ry="12" fill="#fff" opacity="0.8"/>
-                            </svg>
-                        </div>
-                        <div class="cloud cloud-2">
-                            <svg viewBox="0 0 100 60" width="80%" height="80%">
-                                <ellipse cx="50" cy="40" rx="40" ry="20" fill="#90a4ae" opacity="0.6"/>
-                                <ellipse cx="35" cy="30" rx="22" ry="18" fill="#b0bec5" opacity="0.7"/>
-                                <ellipse cx="60" cy="28" rx="18" ry="15" fill="#cfd8dc" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <div class="sun-behind">
-                            <svg viewBox="0 0 64 64" width="70" height="70">
-                                <circle cx="32" cy="32" r="14" fill="#FFD700" class="sun-core"/>
-                                <g class="sun-rays">
-                                    <line x1="32" y1="6" x2="32" y2="14" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="32" y1="50" x2="32" y2="58" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="6" y1="32" x2="14" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="50" y1="32" x2="58" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="13.6" y1="13.6" x2="19.6" y2="19.6" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="44.4" y1="44.4" x2="50.4" y2="50.4" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="13.6" y1="50.4" x2="19.6" y2="44.4" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="44.4" y1="19.6" x2="50.4" y2="13.6" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="rain-container" id="rainContainer">
-                            <div class="rain-drop"></div><div class="rain-drop"></div>
-                            <div class="rain-drop"></div><div class="rain-drop"></div>
-                            <div class="rain-drop"></div><div class="rain-drop"></div>
-                            <div class="rain-drop"></div>
-                        </div>
-                        <div class="snow-container" id="snowContainer">
-                            <div class="snowflake">❄</div>
-                            <div class="snowflake">❄</div>
-                            <div class="snowflake">❄</div>
-                        </div>
-                    </div>
-                    <p class="condition-text" id="conditionText">Parcialmente nublado</p>
-                </div>
-                <div class="temp-main">
-                    <p class="temp-big" id="currentTemp">--°C</p>
-                    <p class="temp-feels">Sensación <span id="currentFeelsLike">--°</span></p>
-                </div>
-            </div>
-
-            <div class="stats-grid" id="statsGrid">
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentHumidity">--%</p>
-                    <p class="stat-label">Humedad</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentWind">-- km/h</p>
-                    <p class="stat-label">Viento</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon wind-dir-icon" id="windDirIcon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M12 2L12 22M12 2L6 8M12 2L18 8"/><path d="M2 12L22 12M2 12L8 6M2 12L8 18" opacity=".5"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentWindDir">--</p>
-                    <p class="stat-label">Dirección</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 12l-.75-2.07A4.001 4.001 0 0 1 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentGusts">-- km/h</p>
-                    <p class="stat-label">Ráfagas</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentUV">--</p>
-                    <p class="stat-label">UV Index</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentPressure">-- hPa</p>
-                    <p class="stat-label">Presión</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2"><path d="M2 12h2M6 12H4M10 7.5l1.5 1.5M14 7.5l-1.5 1.5M7 12l1.5 1.5M11 12l1.5 1.5M12 6V4M12 20v-2M17 12l1.5 1.5M17 12l1.5-1.5"/><circle cx="12" cy="12" r="4"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentVisibility">-- km</p>
-                    <p class="stat-label">Visibilidad</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e879f9" stroke-width="2"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentClouds">--%</p>
-                    <p class="stat-label">Nubosidad</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9"/><line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentPrecip">--%</p>
-                    <p class="stat-label">Prob. Lluvia</p>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
-                    </div>
-                    <p class="stat-value" id="currentDew">--°</p>
-                    <p class="stat-label">Punto Rocío</p>
-                </div>
-            </div>
-
-            <div class="sun-times">
-                <div class="sun-card">
-                    <div class="sun-icon">
-                        <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
-                            <circle cx="32" cy="40" r="12" fill="#FFD700" opacity="0.9"/>
-                            <line x1="32" y1="22" x2="32" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="10" y1="40" x2="16" y2="40" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="48" y1="40" x2="54" y2="40" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="17" y1="28" x2="21" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="43" y1="28" x2="47" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M8 52 L56 52" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="sun-info">
-                        <p class="sun-label">Amanecer</p>
-                        <p class="sun-time" id="sunrise">--:--</p>
-                    </div>
-                </div>
-                <div class="sun-card">
-                    <div class="sun-icon">
-                        <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
-                            <circle cx="32" cy="40" r="12" fill="#fb923c" opacity="0.9"/>
-                            <line x1="32" y1="22" x2="32" y2="28" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="10" y1="40" x2="16" y2="40" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="48" y1="40" x2="54" y2="40" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="17" y1="48" x2="21" y2="44" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="43" y1="48" x2="47" y2="44" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M8 52 L56 52" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="sun-info">
-                        <p class="sun-label">Atardecer</p>
-                        <p class="sun-time" id="sunset">--:--</p>
-                    </div>
-                </div>
-                <div class="sun-card">
-                    <div class="sun-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    </div>
-                    <div class="sun-info">
-                        <p class="sun-label">Horas de Sol</p>
-                        <p class="sun-time" id="sunHours">-- h</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="aqi-row" id="aqiRow">
-                <div class="aqi-badge" id="aqiBadge">
-                    <span class="aqi-label">Calidad del Aire</span>
-                    <span class="aqi-value" id="aqiValue">--</span>
-                    <span class="aqi-status" id="aqiStatus">--</span>
-                </div>
-                <div class="aqi-pollutants">
-                    <div class="pollutant">
-                        <span class="poll-name">PM2.5</span>
-                        <span class="poll-val" id="pm25">-- µg/m³</span>
-                    </div>
-                    <div class="pollutant">
-                        <span class="poll-name">PM10</span>
-                        <span class="poll-val" id="pm10">-- µg/m³</span>
-                    </div>
-                    <div class="pollutant">
-                        <span class="poll-name">CO</span>
-                        <span class="poll-val" id="co">-- ppm</span>
-                    </div>
-                    <div class="pollutant">
-                        <span class="poll-name">NO₂</span>
-                        <span class="poll-val" id="no2">-- ppb</span>
-                    </div>
-                    <div class="pollutant">
-                        <span class="poll-name">O₃</span>
-                        <span class="poll-val" id="o3">-- ppb</span>
-                    </div>
-                    <div class="pollutant">
-                        <span class="poll-name">SO₂</span>
-                        <span class="poll-val" id="so2">-- ppb</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="card chart-card" aria-label="Gráfico de Temperatura">
-            <div class="chart-header">
-                <h2 class="card-title">Temperatura - Próximas 24h</h2>
-                <div class="chart-legend">
-                    <span class="legend-item"><span class="legend-dot" style="background:#60a5fa"></span>Temperatura</span>
-                    <span class="legend-item"><span class="legend-dot" style="background:#fb923c"></span>Sensación</span>
-                </div>
-            </div>
-            <div class="chart-wrap">
-                <canvas id="tempChart"></canvas>
-            </div>
-        </section>
-
-        <section class="card hourly-card" aria-label="Pronóstico por Horas">
-            <div class="hourly-header">
-                <h2 class="card-title">Datos por Hora</h2>
-                <div class="hourly-summary" id="hourlySummary"></div>
-            </div>
-            <div class="hourly-table-wrap">
-                <table class="hourly-table" id="hourlyTable">
-                    <thead>
-                        <tr>
-                            <th>Hora</th>
-                            <th>Estado</th>
-                            <th>Temp</th>
-                            <th>Sens</th>
-                            <th>Hum</th>
-                            <th>Viento</th>
-                            <th>Lluvia</th>
-                            <th>Nubes</th>
-                            <th>Pres</th>
-                        </tr>
-                    </thead>
-                    <tbody id="hourlyTableBody"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="card hourly-card" aria-label="Pronóstico por Horas Scroll">
-            <h2 class="card-title">Próximas Horas</h2>
-            <div class="hourly-scroll" id="hourlyScroll">
-                <div class="hourly-track" id="hourlyTrack"></div>
-            </div>
-        </section>
-
-        <section class="card extended-card" aria-label="Pronóstico Extendido Hora por Hora">
-            <div class="extended-header">
-                <div>
-                    <h2 class="card-title">Pronóstico Extendido Hora por Hora</h2>
-                    <p class="extended-subtitle">Modelo ECMWF IFS · Open-Meteo · Córdoba (-31.42, -64.19) · Hoy + 2 días</p>
-                </div>
-                <span class="model-badge" id="modelBadge">ECMWF IFS 0.25°</span>
-            </div>
-            <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Seleccionar día"></div>
-            <p class="extended-status" id="extendedStatus">Cargando pronóstico de Open-Meteo…</p>
-            <div class="hourly-table-wrap">
-                <table class="hourly-table" id="extendedTable">
-                    <thead>
-                        <tr>
-                            <th>Hora</th>
-                            <th>Estado</th>
-                            <th>Temp</th>
-                            <th>Sens</th>
-                            <th>Hum</th>
-                            <th>Viento</th>
-                            <th>Lluvia</th>
-                            <th>Precip</th>
-                            <th>Nubes</th>
-                            <th>Pres</th>
-                        </tr>
-                    </thead>
-                    <tbody id="extendedTableBody"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="card forecast-card" aria-label="Pronóstico 5 días">
-            <h2 class="card-title">Pronóstico 5 días</h2>
-            <div class="forecast-grid" id="forecastGrid">
-                <div class="forecast-day" data-day="0">
-                    <p class="forecast-date">Hoy</p>
-                    <div class="forecast-icon">
-                        <svg viewBox="0 0 100 60" width="44" height="44">
-                            <ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/>
-                            <ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/>
-                            <ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/>
-                            <line x1="20" y1="14" x2="24" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="50" y1="10" x2="54" y2="24" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="80" y1="14" x2="84" y2="28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <p class="forecast-temp-high">26°</p>
-                    <p class="forecast-temp-low">18°</p>
-                    <p class="forecast-desc">Lluvia aislada</p>
-                </div>
-                <div class="forecast-day" data-day="1">
-                    <p class="forecast-date">Mañana</p>
-                    <div class="forecast-icon">
-                        <svg viewBox="0 0 100 60" width="44" height="44">
-                            <ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/>
-                            <ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/>
-                            <ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/>
-                        </svg>
-                    </div>
-                    <p class="forecast-temp-high">28°</p>
-                    <p class="forecast-temp-low">19°</p>
-                    <p class="forecast-desc">Mayormente nublado</p>
-                </div>
-                <div class="forecast-day" data-day="2">
-                    <p class="forecast-date">Jue 7</p>
-                    <div class="forecast-icon">
-                        <svg viewBox="0 0 100 70" width="44" height="44">
-                            <ellipse cx="50" cy="45" rx="40" ry="20" fill="#607d8b" opacity="0.9"/>
-                            <ellipse cx="30" cy="32" rx="22" ry="18" fill="#78909c" opacity="0.95"/>
-                            <ellipse cx="62" cy="30" rx="18" ry="15" fill="#90a4ae" opacity="0.95"/>
-                            <circle cx="22" cy="58" r="3" fill="#4fc3f7" opacity="0.8"/>
-                            <circle cx="45" cy="62" r="2.5" fill="#4fc3f7" opacity="0.7"/>
-                            <circle cx="68" cy="56" r="3" fill="#4fc3f7" opacity="0.8"/>
-                            <circle cx="55" cy="66" r="2" fill="#4fc3f7" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <p class="forecast-temp-high">23°</p>
-                    <p class="forecast-temp-low">16°</p>
-                    <p class="forecast-desc">Tormentas</p>
-                </div>
-                <div class="forecast-day" data-day="3">
-                    <p class="forecast-date">Vie 8</p>
-                    <div class="forecast-icon">
-                        <svg viewBox="0 0 100 60" width="44" height="44">
-                            <ellipse cx="50" cy="40" rx="40" ry="20" fill="#78909c" opacity="0.9"/>
-                            <ellipse cx="35" cy="30" rx="22" ry="18" fill="#90a4ae" opacity="0.95"/>
-                            <ellipse cx="60" cy="28" rx="18" ry="15" fill="#b0bec5" opacity="0.95"/>
-                        </svg>
-                    </div>
-                    <p class="forecast-temp-high">20°</p>
-                    <p class="forecast-temp-low">14°</p>
-                    <p class="forecast-desc">Lluvioso</p>
-                </div>
-                <div class="forecast-day" data-day="4">
-                    <p class="forecast-date">Sáb 9</p>
-                    <div class="forecast-icon">
-                        <svg viewBox="0 0 64 64" width="44" height="44">
-                            <circle cx="32" cy="32" r="12" fill="#FFD700"/>
-                            <line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <p class="forecast-temp-high">25°</p>
-                    <p class="forecast-temp-low">15°</p>
-                    <p class="forecast-desc">Soleado</p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer class="site-footer">
-        <p>Dashboard de Clima · Córdoba, Argentina · Pronóstico extendido: Open-Meteo (ECMWF IFS)</p>
+        <p>Clima en la casa ⓘ</p>
+        <p>Doctor Pablo Luis Mirizzi 564, X5016 Córdoba, Córdoba</p>
+        <button class="footer-toggle" id="toggleExtended" type="button">Mostrar datos extendidos</button>
     </footer>
 
+    <section class="extended-data" id="extendedData" hidden>
+        <div class="extended-card">
+            <div class="extended-header-row">
+                <div>
+                    <h2>Datos extendidos</h2>
+                    <p>Open-Meteo · ECMWF IFS · Córdoba</p>
+                </div>
+                <button class="footer-toggle" id="closeExtended" type="button">Ocultar</button>
+            </div>
+
+            <div class="extended-section">
+                <h3>Temperatura - Próximas 24h</h3>
+                <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
+            </div>
+
+            <div class="extended-section">
+                <h3>Pronóstico por horas</h3>
+                <div class="hourly-table-wrap">
+                    <table class="hourly-table">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Estado</th>
+                                <th>Temp</th>
+                                <th>Sens</th>
+                                <th>Hum</th>
+                                <th>Viento</th>
+                                <th>Lluvia</th>
+                                <th>Nubes</th>
+                                <th>Pres</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hourlyTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="hourly-scroll" id="hourlyScroll">
+                    <div class="hourly-track" id="hourlyTrack"></div>
+                </div>
+            </div>
+
+            <div class="extended-section">
+                <div class="extended-header-row">
+                    <div>
+                        <h3>Pronóstico extendido hora por hora</h3>
+                        <p>Modelo ECMWF IFS · Open-Meteo · Hoy + 2 días</p>
+                    </div>
+                    <span class="model-badge">ECMWF IFS 0.25°</span>
+                </div>
+                <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Seleccionar día"></div>
+                <p class="extended-status" id="extendedStatus">Cargando pronóstico de Open-Meteo…</p>
+                <div class="hourly-table-wrap">
+                    <table class="hourly-table">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Estado</th>
+                                <th>Temp</th>
+                                <th>Sens</th>
+                                <th>Hum</th>
+                                <th>Viento</th>
+                                <th>Lluvia</th>
+                                <th>Precip</th>
+                                <th>Nubes</th>
+                                <th>Pres</th>
+                            </tr>
+                        </thead>
+                        <tbody id="extendedTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="extended-section">
+                <h3>Pronóstico 5 días</h3>
+                <div class="forecast-grid" id="forecastGrid"></div>
+            </div>
+        </div>
+    </section>
+
     <script>
-    (function(){
-      const CITY = 'Córdoba, Argentina';
+    (function () {
+        const CITY_CONFIG = {
+            'Córdoba': { lat: -31.4201, lon: -64.1888, label: 'CASA' }
+        };
+        let activeCity = 'Córdoba';
+        let chart = null;
+        let extendedDays = [];
+        let selectedDay = 0;
 
-      const elCityName    = document.getElementById('cityName');
-      const elTemp        = document.getElementById('currentTemp');
-      const elFeels       = document.getElementById('currentFeelsLike');
-      const elHumidity    = document.getElementById('currentHumidity');
-      const elWind        = document.getElementById('currentWind');
-      const elWindDir     = document.getElementById('currentWindDir');
-      const elGusts       = document.getElementById('currentGusts');
-      const elUV          = document.getElementById('currentUV');
-      const elPressure    = document.getElementById('currentPressure');
-      const elVisibility  = document.getElementById('currentVisibility');
-      const elClouds     = document.getElementById('currentClouds');
-      const elPrecip      = document.getElementById('currentPrecip');
-      const elDew         = document.getElementById('currentDew');
-      const elCondition   = document.getElementById('conditionText');
-      const elDateTime    = document.getElementById('dateTime');
-      const elRain        = document.getElementById('rainContainer');
-      const elSnow        = document.getElementById('snowContainer');
-      const elSunrise     = document.getElementById('sunrise');
-      const elSunset      = document.getElementById('sunset');
-      const elSunHours    = document.getElementById('sunHours');
-      const elAqiValue   = document.getElementById('aqiValue');
-      const elAqiStatus  = document.getElementById('aqiStatus');
-      const elAqiBadge   = document.getElementById('aqiBadge');
-      const elPm25       = document.getElementById('pm25');
-      const elPm10       = document.getElementById('pm10');
-      const elCo         = document.getElementById('co');
-      const elNo2        = document.getElementById('no2');
-      const elO3         = document.getElementById('o3');
-      const elSo2        = document.getElementById('so2');
-      const elAlertsList = document.getElementById('alertsList');
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
-      let chart = null;
-
-      function updateDateTime(){
-        const now = new Date();
-        const opts = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        elDateTime.textContent = now.toLocaleDateString('es-AR', opts);
-      }
-      setInterval(updateDateTime, 1000);
-      updateDateTime();
-
-      const WIND_DIRS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-      function getWindDir(deg){
-        if (deg == null) return '--';
-        const i = Math.round(deg / 22.5) % 16;
-        return WIND_DIRS[i];
-      }
-
-      function getAqiLevel(aqi){
-        if (aqi == null) return null;
-        if (aqi <= 50)  return { label: 'Bueno',       color: '#34d399', bg: 'rgba(52,211,153,.15)' };
-        if (aqi <= 100) return { label: 'Moderado',     color: '#fbbf24', bg: 'rgba(251,191,36,.15)' };
-        if (aqi <= 150) return { label: 'No sano',      color: '#fb923c', bg: 'rgba(251,146,60,.15)' };
-        if (aqi <= 200) return { label: 'Dañino',       color: '#f87171', bg: 'rgba(248,113,113,.15)' };
-        if (aqi <= 300) return { label: 'Muy dañino',   color: '#a78bfa', bg: 'rgba(167,139,250,.15)' };
-        return { label: 'Peligroso', color: '#dc2626', bg: 'rgba(220,38,38,.15)' };
-      }
-
-      function getUVLevel(uv){
-        if (uv == null) return null;
-        if (uv <= 2)    return { label: 'Bajo',       color: '#34d399' };
-        if (uv <= 5)    return { label: 'Moderado',    color: '#fbbf24' };
-        if (uv <= 7)    return { label: 'Alto',        color: '#fb923c' };
-        if (uv <= 10)   return { label: 'Muy alto',     color: '#f87171' };
-        return { label: 'Extremo', color: '#a78bfa' };
-      }
-
-      function calcSunHours(sr, ss){
-        if (!sr || !ss) return '--';
-        const diff = (ss - sr) * 3600;
-        const h = Math.floor(diff / 3600);
-        const m = Math.round((diff % 3600) / 60);
-        return `${h}h ${m}m`;
-      }
-
-      function formatHrs(dec){
-        const h = Math.floor(dec);
-        const m = Math.round((dec - h) * 60);
-        return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-      }
-      function calcHrs(sr, ss){
-        const diff = (ss - sr) * 3600;
-        const h = Math.floor(diff / 3600);
-        const m = Math.round((diff % 3600) / 60);
-        return `${h}h ${m}m`;
-      }
-
-      function renderAlerts(alerts){
-        if (!alerts || alerts.length === 0){
-          elAlertsList.innerHTML = '';
-          document.getElementById('alertsSection').style.display = 'none';
-          return;
+        function wmoToSpanish(code) {
+            if (code === 0) return { label: 'Despejado', icon: '☀' };
+            if (code === 1) return { label: 'Casi despejado', icon: '🌤' };
+            if (code === 2) return { label: 'Parcialmente nublado', icon: '⛅' };
+            if (code === 3) return { label: 'Nublado', icon: '☁' };
+            if (code === 45 || code === 48) return { label: 'Niebla', icon: '🌫' };
+            if ([51, 53, 55, 56, 57].includes(code)) return { label: 'Llovizna', icon: '🌦' };
+            if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return { label: 'Lluvia', icon: '🌧' };
+            if ([71, 73, 75, 77, 85, 86].includes(code)) return { label: 'Nieve', icon: '❄' };
+            if ([95, 96, 99].includes(code)) return { label: 'Tormenta', icon: '⛈' };
+            return { label: 'Nublado', icon: '☁' };
         }
-        document.getElementById('alertsSection').style.display = 'block';
-        elAlertsList.innerHTML = alerts.map(a => `
-          <div class="alert-item alert-${a.severity || 'info'}">
-            <div class="alert-icon">
-              ${a.severity === 'extreme' ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' :
-                a.severity === 'severe' ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' :
-                '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'}
-            </div>
-            <div class="alert-content">
-              <p class="alert-title">${a.event || 'Alerta'}</p>
-              <p class="alert-desc">${a.description || ''}</p>
-            </div>
-            ${a.expires ? `<span class="alert-expires">Vence: ${new Date(a.expires * 1000).toLocaleDateString('es-AR')}</span>` : ''}
-          </div>
-        `).join('');
-      }
 
-      function buildChart(labels, temps, feels){
-        const ctx = document.getElementById('tempChart');
-        if (!ctx) return;
-        if (chart) { chart.destroy(); chart = null; }
-        chart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels,
-            datasets: [
-              {
-                label: 'Temperatura (°C)',
-                data: temps,
-                borderColor: '#60a5fa',
-                backgroundColor: 'rgba(96,165,250,.12)',
-                borderWidth: 2.5,
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                pointBackgroundColor: '#60a5fa',
-                fill: true,
-                tension: 0.4
-              },
-              {
-                label: 'Sensación (°C)',
-                data: feels,
-                borderColor: '#fb923c',
-                backgroundColor: 'rgba(251,146,60,.08)',
-                borderWidth: 2,
-                pointRadius: 3,
-                pointHoverRadius: 5,
-                pointBackgroundColor: '#fb923c',
-                borderDash: [5, 3],
-                fill: false,
-                tension: 0.4
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                backgroundColor: '#1a1d2e',
-                borderColor: '#2d3348',
-                borderWidth: 1,
-                titleColor: '#e2e8f0',
-                bodyColor: '#94a3b8',
-                padding: 10,
-                cornerRadius: 8
-              }
-            },
-            scales: {
-              x: {
-                grid: { color: 'rgba(45,51,72,.5)', drawBorder: false },
-                ticks: { color: '#64748b', font: { size: 11 } }
-              },
-              y: {
-                grid: { color: 'rgba(45,51,72,.5)', drawBorder: false },
-                ticks: { color: '#64748b', font: { size: 11 }, callback: v => v + '°' }
-              }
+        function formatHour(dateString) {
+            return new Date(dateString).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function formatDayLabel(isoDate, idx) {
+            const d = new Date(isoDate + 'T12:00:00');
+            const name = idx === 0 ? 'Hoy' : idx === 1 ? 'Mañana' : d.toLocaleDateString('es-AR', { weekday: 'short' });
+            const num = d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+            return { name, num };
+        }
+
+        function setCardText(className, value) {
+            const el = $(className);
+            if (el) el.textContent = value;
+        }
+
+        function updateLocationHeader(data, city) {
+            const config = CITY_CONFIG[city] || CITY_CONFIG['Córdoba'];
+            $('.location-label').textContent = config.label;
+            $('.location-city').textContent = city;
+            $('.location-temp').textContent = Math.round(data.current.temperature_2m) + '°';
+            $('.location-condition').textContent = wmoToSpanish(data.current.weather_code).label;
+            $('.location-temps').textContent = `Máxima: ${Math.round(data.daily.temperature_2m_max[0])}°  Mínima: ${Math.round(data.daily.temperature_2m_min[0])}°`;
+        }
+
+        function updateDashboard(data) {
+            const current = data.current;
+            const daily = data.daily;
+            const weather = wmoToSpanish(current.weather_code);
+
+            setCardText('.location-temp', Math.round(current.temperature_2m) + '°');
+            setCardText('.location-condition', weather.label);
+            setCardText('.location-temps', `Máxima: ${Math.round(daily.temperature_2m_max[0])}°  Mínima: ${Math.round(daily.temperature_2m_min[0])}°`);
+
+            const activeCard = $('.loc-card.active');
+            if (activeCard) {
+                activeCard.querySelector('.loc-card-temp').textContent = Math.round(current.temperature_2m) + '°';
+                activeCard.querySelector('.loc-card-condition').textContent = weather.label;
+                activeCard.querySelector('.loc-card-temps').textContent = `Máxima: ${Math.round(daily.temperature_2m_max[0])}°  Mínima: ${Math.round(daily.temperature_2m_min[0])}°`;
             }
-          }
-        });
-      }
 
-      function buildHourlyTable(hourly){
-        const tbody = document.getElementById('hourlyTableBody');
-        const summary = document.getElementById('hourlySummary');
-        if (!tbody || !hourly || hourly.length === 0) return;
+            setCardText('.promedios-temp', '+' + Math.max(0, Math.round(current.temperature_2m - ((daily.temperature_2m_max[0] + daily.temperature_2m_min[0]) / 2))) + '°');
+            setCardText('.amanecer-time', new Date(daily.sunrise[0]).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' }));
+            setCardText('.card-amanecer .card-label-small', `Atardecer: ${new Date(daily.sunset[0]).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}`);
+            setCardText('.uv-value', String(daily.uv_index_max ? Math.round(daily.uv_index_max[0]) : 0));
+            setCardText('.uv-status', daily.uv_index_max && daily.uv_index_max[0] <= 2 ? 'Bajo' : 'Moderado');
+            setCardText('.sensacion-temp', Math.round(current.apparent_temperature) + '°');
+            setCardText('.precip-value', (daily.precipitation_sum ? daily.precipitation_sum[0] : 0).toFixed(1).replace('.', ',') + ' mm');
+            setCardText('.visibilidad-value', '32 km');
+            setCardText('.humedad-value', Math.round(current.relative_humidity_2m) + '%');
+            setCardText('.presion-value', (current.pressure_msl / 1000).toFixed(3).replace('.', ','));
 
-        const icons = {
-          'Soleado':   '<svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>',
-          'Parcial':   '<svg viewBox="0 0 100 60" width="24" height="24"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/></svg>',
-          'Nublado':   '<svg viewBox="0 0 100 60" width="24" height="24"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#78909c" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#90a4ae" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#b0bec5" opacity="0.95"/></svg>',
-          'Lluvia':    '<svg viewBox="0 0 100 70" width="24" height="24"><ellipse cx="50" cy="45" rx="40" ry="20" fill="#607d8b" opacity="0.9"/><ellipse cx="30" cy="32" rx="22" ry="18" fill="#78909c" opacity="0.95"/><ellipse cx="62" cy="30" rx="18" ry="15" fill="#90a4ae" opacity="0.95"/><circle cx="22" cy="58" r="3" fill="#4fc3f7" opacity="0.8"/><circle cx="45" cy="62" r="2.5" fill="#4fc3f7" opacity="0.7"/><circle cx="68" cy="56" r="3" fill="#4fc3f7" opacity="0.8"/></svg>',
-          'Despejado': '<svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>'
-        };
+            const windArc = $('.card-viento .wind-gauge circle:nth-of-type(2)');
+            if (windArc) {
+                const pct = Math.min(1, current.wind_speed_10m / 50);
+                windArc.setAttribute('stroke-dasharray', `${Math.round(pct * 282)} 360`);
+            }
+            const windText = $('.wind-gauge text');
+            if (windText) windText.textContent = Math.round(current.wind_speed_10m);
 
-        tbody.innerHTML = hourly.map((h, i) => {
-          const icon = icons[h.desc] || icons['Parcial'];
-          const rowClass = i === 0 ? ' class="row-now"' : '';
-          return `<tr${rowClass}>
-            <td>${h.time}</td>
-            <td><div class="tbl-icon">${icon}</div></td>
-            <td>${h.temp}°</td>
-            <td>${h.feels}°</td>
-            <td>${h.hum}%</td>
-            <td>${h.wind} km/h</td>
-            <td>${h.rain}%</td>
-            <td>${h.clouds}%</td>
-            <td>${h.pres} hPa</td>
-          </tr>`;
-        }).join('');
+            const pressureArc = $('.card-presion .presion-gauge circle:nth-of-type(2)');
+            if (pressureArc) {
+                const pct = Math.min(1, (current.pressure_msl - 980) / 60);
+                pressureArc.setAttribute('stroke-dasharray', `${Math.round(pct * 180)} 220`);
+            }
 
-        const maxTemp = Math.max(...hourly.map(h => h.temp));
-        const minTemp = Math.min(...hourly.map(h => h.temp));
-        const maxRain = Math.max(...hourly.map(h => h.rain));
-        if (summary){
-          summary.innerHTML = `<span>Máx: <strong>${maxTemp}°</strong> · Mín: <strong>${minTemp}°</strong> · Lluvia máx: <strong>${maxRain}%</strong></span>`;
-        }
-      }
+            const hourlyItems = $$('.card-estado .hourly-item');
+            if (hourlyItems.length) {
+                const nextHours = data.hourly.time.slice(0, hourlyItems.length);
+                hourlyItems.forEach((item, i) => {
+                    const idx = i;
+                    const info = wmoToSpanish(data.hourly.weather_code[idx]);
+                    item.querySelector('.hourly-time').textContent = i === 0 ? 'Ahora' : formatHour(data.hourly.time[idx]);
+                    item.querySelector('.hourly-icon').textContent = info.icon;
+                    item.querySelector('.hourly-temp').textContent = Math.round(data.hourly.temperature_2m[idx]) + '°';
+                });
+            }
 
-      function buildHourlyScroll(){
-        const track = document.getElementById('hourlyTrack');
-        const now = new Date();
-        const icons = [
-          '<svg viewBox="0 0 64 64" width="32" height="32"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>',
-          '<svg viewBox="0 0 100 60" width="32" height="32"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/></svg>',
-          '<svg viewBox="0 0 100 70" width="32" height="32"><ellipse cx="50" cy="50" rx="40" ry="18" fill="#78909c" opacity="0.9"/><ellipse cx="30" cy="38" rx="20" ry="16" fill="#90a4ae" opacity="0.9"/><ellipse cx="65" cy="35" rx="16" ry="13" fill="#b0bec5" opacity="0.9"/><line x1="25" y1="18" x2="28" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="12" x2="53" y2="26" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="75" y1="18" x2="78" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>',
-          '<svg viewBox="0 0 100 70" width="32" height="32"><ellipse cx="50" cy="45" rx="40" ry="20" fill="#607d8b" opacity="0.9"/><ellipse cx="30" cy="32" rx="22" ry="18" fill="#78909c" opacity="0.95"/><ellipse cx="62" cy="30" rx="18" ry="15" fill="#90a4ae" opacity="0.95"/><circle cx="22" cy="58" r="3" fill="#4fc3f7" opacity="0.8"/><circle cx="45" cy="62" r="2.5" fill="#4fc3f7" opacity="0.7"/><circle cx="68" cy="56" r="3" fill="#4fc3f7" opacity="0.8"/></svg>',
-          '<svg viewBox="0 0 64 64" width="32" height="32"><circle cx="32" cy="32" r="14" fill="#FFD700" opacity="0.4"/><circle cx="32" cy="32" r="6" fill="#FFD700"/></svg>',
-          '<svg viewBox="0 0 100 60" width="32" height="32"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#546e7a" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#607d8b" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#78909c" opacity="0.95"/></svg>',
-          '<svg viewBox="0 0 64 64" width="32" height="32"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>',
-          '<svg viewBox="0 0 100 60" width="32" height="32"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/></svg>'
-        ];
-        const descs = ['Parcial','Parcial','Nublado','Nublado','Lluvia','Lluvia','Tormenta','Lluvia','Nublado','Nublado','Cubierto','Cubierto','Nublado','Nublado','Parcial','Parcial','Despejado','Despejado','Despejado','Soleado','Soleado','Despejado','Parcial','Parcial'];
-        const temps = [26,26,27,27,26,25,24,23,22,22,21,21,20,20,21,22,23,24,25,25,25,24,23,22];
-        const feels = [25,25,26,26,25,24,23,22,21,21,20,20,19,19,20,21,22,23,24,24,24,23,22,21];
-        const hums  = [65,65,63,65,70,75,78,80,75,73,72,71,70,70,68,66,62,58,55,52,52,55,58,60];
-        const winds = [12,13,14,16,18,20,22,24,20,18,15,14,13,12,11,10,9,8,8,9,10,11,12,12];
-        const rains = [5,10,15,25,35,45,55,50,35,25,15,10,5,5,5,5,0,0,0,0,0,0,5,5];
-        const cloud= [42,45,50,55,62,70,75,72,65,60,58,55,55,55,50,45,38,30,25,20,20,25,30,35];
-        const pres = [1013,1012,1011,1010,1009,1009,1010,1011,1012,1013,1014,1015,1015,1014,1013,1012,1011,1010,1010,1011,1012,1012,1013,1013];
-        const nowH = now.getHours();
-
-        for (let i = 0; i < 24; i++){
-          const h = (nowH + i) % 24;
-          const label = i === 0 ? 'Ahora' : `${String(h).padStart(2,'0')}:00`;
-          const iconIdx = i % icons.length;
-          const desc = descs[i % descs.length];
-
-          const card = document.createElement('div');
-          card.className = 'hourly-item' + (i === 0 ? ' active' : '');
-          card.innerHTML = `
-            <p class="hourly-time">${label}</p>
-            <div class="hourly-icon">${icons[iconIdx]}</div>
-            <p class="hourly-temp">${temps[i]}°</p>
-            <p class="hourly-desc">${desc}</p>
-          `;
-          track.appendChild(card);
+            const hoyRows = $$('.hoy-row');
+            if (hoyRows.length) {
+                const days = daily.time.slice(0, hoyRows.length);
+                hoyRows.forEach((row, i) => {
+                    const info = wmoToSpanish(daily.weather_code[i]);
+                    const low = Math.round(daily.temperature_2m_min[i]);
+                    const high = Math.round(daily.temperature_2m_max[i]);
+                    row.querySelector('.hoy-day').textContent = i === 0 ? 'Hoy' : formatDayLabel(daily.time[i], i).name;
+                    row.querySelector('.hoy-icon').textContent = info.icon;
+                    row.querySelector('.hoy-temp-low').textContent = low + '°';
+                    row.querySelector('.hoy-temp-high').textContent = high + '°';
+                    const fill = row.querySelector('.hoy-bar-fill');
+                    if (fill) {
+                        const range = Math.max(1, high - low);
+                        fill.style.width = Math.round(((high - low) / range) * 100) + '%';
+                    }
+                });
+            }
         }
 
-        const labels = Array.from({length:24},(_,i)=>{
-          const h = (nowH + i) % 24;
-          return i === 0 ? 'Ahora' : `${String(h).padStart(2,'0')}:00`;
-        });
-        buildChart(labels, temps, feels);
-
-        const hourlyData = Array.from({length:24},(_,i)=>{
-          const h = (nowH + i) % 24;
-          return {
-            time:  i === 0 ? 'Ahora' : `${String(h).padStart(2,'0')}:00`,
-            temp:  temps[i],
-            feels: feels[i],
-            hum:   hums[i],
-            wind:  winds[i],
-            rain:  rains[i],
-            clouds:cloud[i],
-            pres:  pres[i],
-            desc:  descs[i % descs.length]
-          };
-        });
-        buildHourlyTable(hourlyData);
-      }
-
-      /* ===== Pronóstico extendido hora por hora — Open-Meteo ECMWF IFS ===== */
-      // Coordenadas del punto deseado (Córdoba: -31.42, -64.18)
-      const LAT = -31.4201;
-      const LON = -64.1888;
-
-      // Pedimos ECMWF IFS con datos horarios para 3 días (hoy + 2 subsiguientes)
-      const OM_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation_probability,precipitation,weather_code,cloud_cover,pressure_msl,wind_speed_10m&models=ecmwf_ifs025&forecast_days=3&timezone=auto`;
-
-      let extendedDays = [];
-      let selectedDay = 0;
-
-      function wmoToSpanish(code){
-        if (code === 0)  return { label: 'Despejado', key: 'Despejado' };
-        if (code === 1)  return { label: 'Casi despejado', key: 'Soleado' };
-        if (code === 2)  return { label: 'Parcialmente nublado', key: 'Parcial' };
-        if (code === 3)  return { label: 'Nublado', key: 'Nublado' };
-        if (code === 45 || code === 48) return { label: 'Niebla', key: 'Nublado' };
-        if ([51,53,55,56,57].includes(code)) return { label: 'Llovizna', key: 'Lluvia' };
-        if ([61,63,65,66,67,80,81,82].includes(code)) return { label: 'Lluvia', key: 'Lluvia' };
-        if ([71,73,75,77,85,86].includes(code)) return { label: 'Nieve', key: 'Lluvia' };
-        if ([95,96,99].includes(code)) return { label: 'Tormenta', key: 'Lluvia' };
-        return { label: 'Nublado', key: 'Nublado' };
-      }
-
-      function extIcon(key){
-        const icons = {
-          'Soleado':   '<svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>',
-          'Despejado': '<svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="12" fill="none" stroke="#FFD700" stroke-width="2.5"/><circle cx="32" cy="32" r="5" fill="#FFD700"/></svg>',
-          'Parcial':   '<svg viewBox="0 0 100 60" width="24" height="24"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/></svg>',
-          'Nublado':   '<svg viewBox="0 0 100 60" width="24" height="24"><ellipse cx="50" cy="40" rx="40" ry="20" fill="#78909c" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#90a4ae" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#b0bec5" opacity="0.95"/></svg>',
-          'Lluvia':    '<svg viewBox="0 0 100 70" width="24" height="24"><ellipse cx="50" cy="45" rx="40" ry="20" fill="#607d8b" opacity="0.9"/><ellipse cx="30" cy="32" rx="22" ry="18" fill="#78909c" opacity="0.95"/><ellipse cx="62" cy="30" rx="18" ry="15" fill="#90a4ae" opacity="0.95"/><circle cx="22" cy="58" r="3" fill="#4fc3f7" opacity="0.8"/><circle cx="45" cy="62" r="2.5" fill="#4fc3f7" opacity="0.7"/><circle cx="68" cy="56" r="3" fill="#4fc3f7" opacity="0.8"/></svg>'
-        };
-        return icons[key] || icons['Parcial'];
-      }
-
-      function formatDayLabel(isoDate, idx){
-        const d = new Date(isoDate + 'T12:00:00');
-        const name = idx === 0 ? 'Hoy' : idx === 1 ? 'Mañana'
-          : d.toLocaleDateString('es-AR', { weekday: 'short' });
-        const num = d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
-        return { name, num };
-      }
-
-      function renderDayTabs(){
-        const tabs = document.getElementById('dayTabs');
-        if (!tabs) return;
-        tabs.innerHTML = extendedDays.map((day, i) => {
-          const { name, num } = formatDayLabel(day.date, i);
-          const tmax = Math.max(...day.hours.map(h => h.temp));
-          const tmin = Math.min(...day.hours.map(h => h.temp));
-          return `<button class="day-tab${i === selectedDay ? ' active' : ''}" role="tab" aria-selected="${i === selectedDay}" data-day="${i}">
-            <span class="day-tab-name">${name}</span>
-            <span class="day-tab-date">${num}</span>
-            <span class="day-tab-temp">${Math.round(tmax)}° / ${Math.round(tmin)}°</span>
-          </button>`;
-        }).join('');
-        tabs.querySelectorAll('.day-tab').forEach(btn => {
-          btn.addEventListener('click', () => {
-            selectedDay = Number(btn.dataset.day);
-            renderDayTabs();
-            renderExtendedTable();
-          });
-        });
-      }
-
-      function renderExtendedTable(){
-        const tbody = document.getElementById('extendedTableBody');
-        const status = document.getElementById('extendedStatus');
-        if (!tbody || !extendedDays.length) return;
-        const day = extendedDays[selectedDay];
-        tbody.innerHTML = day.hours.map(h => `
-          <tr>
-            <td>${h.hora}</td>
-            <td><div class="tbl-icon" title="${h.desc}">${extIcon(h.iconKey)}</div></td>
-            <td>${h.temp}°</td>
-            <td>${h.feels}°</td>
-            <td>${h.hum}%</td>
-            <td>${h.wind} km/h</td>
-            <td>${h.rainProb}%</td>
-            <td>${h.precip} mm</td>
-            <td>${h.clouds}%</td>
-            <td>${h.pres} hPa</td>
-          </tr>`).join('');
-        if (status){
-          const { name, num } = formatDayLabel(day.date, selectedDay);
-          const tmax = Math.max(...day.hours.map(h => h.temp));
-          const tmin = Math.min(...day.hours.map(h => h.temp));
-          const pmax = Math.max(...day.hours.map(h => h.rainProb));
-          status.innerHTML = `<span><strong>${name} ${num}</strong> · Máx <strong>${tmax.toFixed(1)}°</strong> · Mín <strong>${tmin.toFixed(1)}°</strong> · Lluvia máx <strong>${pmax}%</strong> · 24 horas · Fuente Open-Meteo</span>`;
+        function updateAirQuality(data) {
+            if (!data || !data.current) return;
+            const current = data.current;
+            setCardText('.humedad-value', Math.round(current.european_aqi) + '%');
         }
-      }
 
-      async function getForecast(){
-        const status = document.getElementById('extendedStatus');
-        try {
-          const res = await fetch(OM_URL);
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          const data = await res.json();
+        function buildForecastUrl(city) {
+            const cfg = CITY_CONFIG[city];
+            return `https://api.open-meteo.com/v1/forecast?latitude=${cfg.lat}&longitude=${cfg.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,cloud_cover,pressure_msl,wind_speed_10m,wind_direction_10m,weather_code&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation_probability,weather_code,cloud_cover,pressure_msl,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum&timezone=auto&forecast_days=10&models=ecmwf_ifs025`;
+        }
 
-          // data.hourly contiene arrays paralelos: time, temperature_2m, weather_code, etc.
-          const H = data.hourly;
-          const byDate = {};
-          H.time.forEach((t, i) => {
-            const [date, hm] = t.split('T');
-            if (!byDate[date]) byDate[date] = [];
-            const w = wmoToSpanish(H.weather_code[i]);
-            byDate[date].push({
-              hora: hm.slice(0, 5),
-              temp: Math.round(H.temperature_2m[i]),
-              feels: H.apparent_temperature ? Math.round(H.apparent_temperature[i]) : Math.round(H.temperature_2m[i]),
-              hum: H.relative_humidity_2m[i],
-              wind: Math.round(H.wind_speed_10m[i]),
-              rainProb: H.precipitation_probability ? (H.precipitation_probability[i] ?? 0) : 0,
-              precip: H.precipitation ? H.precipitation[i].toFixed(1) : '0.0',
-              clouds: H.cloud_cover ? H.cloud_cover[i] : '--',
-              pres: H.pressure_msl ? Math.round(H.pressure_msl[i]) : '--',
-              code: H.weather_code[i],
-              desc: w.label,
-              iconKey: w.key
+        function buildAirQualityUrl(city) {
+            const cfg = CITY_CONFIG[city];
+            return `https://api.open-meteo.com/v1/air-quality?latitude=${cfg.lat}&longitude=${cfg.lon}&current=european_aqi,pm2_5,pm10,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone&timezone=auto`;
+        }
+
+        async function loadWeather(city) {
+            activeCity = city;
+            try {
+                const [forecastRes, airRes] = await Promise.all([
+                    fetch(buildForecastUrl(city)),
+                    fetch(buildAirQualityUrl(city))
+                ]);
+                if (!forecastRes.ok) throw new Error('Open-Meteo forecast error');
+                const forecast = await forecastRes.json();
+                const air = airRes.ok ? await airRes.json() : null;
+                updateLocationHeader(forecast, city);
+                updateDashboard(forecast);
+                updateAirQuality(air);
+                buildExtendedData(forecast);
+            } catch (err) {
+                console.warn('No se pudo actualizar el clima:', err);
+            }
+        }
+
+        function bindLocationCards() {
+            $$('.loc-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    $$('.loc-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    loadWeather(card.dataset.city);
+                });
             });
-          });
-
-          extendedDays = Object.keys(byDate).sort().slice(0, 3).map(date => ({ date, hours: byDate[date] }));
-          selectedDay = 0;
-          renderDayTabs();
-          renderExtendedTable();
-        } catch (error) {
-          console.error('Error al consultar el pronóstico:', error);
-          if (status) status.textContent = 'No se pudo cargar Open-Meteo. Revisá tu conexión e intentá de nuevo.';
-        }
-      }
-
-      /* ===== Pronóstico 5 días — fechas dinámicas + datos Open-Meteo ===== */
-      function forecastLabelFor(offset){
-        if (offset === 0) return 'Hoy';
-        if (offset === 1) return 'Mañana';
-        const d = new Date();
-        d.setDate(d.getDate() + offset);
-        const wd = d.toLocaleDateString('es-AR', { weekday: 'short' }).replace('.', '');
-        const wdCap = wd.charAt(0).toUpperCase() + wd.slice(1);
-        return `${wdCap} ${d.getDate()}`;
-      }
-
-      function forecastIcon44(key){
-        const S = (inner) => `<svg viewBox="0 0 100 60" width="44" height="44">${inner}</svg>`;
-        const SUN = `<svg viewBox="0 0 64 64" width="44" height="44"><circle cx="32" cy="32" r="12" fill="#FFD700"/><line x1="32" y1="8" x2="32" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="49" x2="32" y2="56" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="32" x2="15" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="49" y1="32" x2="56" y2="32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="15" x2="20" y2="20" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="44" x2="49" y2="49" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="49" x2="20" y2="44" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="20" x2="49" y2="15" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/></svg>`;
-        if (key === 'Soleado' || key === 'Despejado') return SUN;
-        if (key === 'Parcial') return S(`<ellipse cx="50" cy="40" rx="40" ry="20" fill="#b0bec5" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#cfd8dc" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#eceff1" opacity="0.95"/>`);
-        if (key === 'Lluvia') return `<svg viewBox="0 0 100 70" width="44" height="44"><ellipse cx="50" cy="45" rx="40" ry="20" fill="#607d8b" opacity="0.9"/><ellipse cx="30" cy="32" rx="22" ry="18" fill="#78909c" opacity="0.95"/><ellipse cx="62" cy="30" rx="18" ry="15" fill="#90a4ae" opacity="0.95"/><circle cx="22" cy="58" r="3" fill="#4fc3f7" opacity="0.8"/><circle cx="45" cy="62" r="2.5" fill="#4fc3f7" opacity="0.7"/><circle cx="68" cy="56" r="3" fill="#4fc3f7" opacity="0.8"/></svg>`;
-        return S(`<ellipse cx="50" cy="40" rx="40" ry="20" fill="#78909c" opacity="0.9"/><ellipse cx="35" cy="30" rx="22" ry="18" fill="#90a4ae" opacity="0.95"/><ellipse cx="60" cy="28" rx="18" ry="15" fill="#b0bec5" opacity="0.95"/>`);
-      }
-
-      function fixForecastDates(){
-        document.querySelectorAll('#forecastGrid .forecast-day').forEach((card) => {
-          const offset = Number(card.dataset.day || 0);
-          const label = card.querySelector('.forecast-date');
-          if (label) label.textContent = forecastLabelFor(offset);
-        });
-      }
-
-      async function loadDailyForecast(){
-        // 1) Corrige el orden natural de inmediato (aunque falle la red)
-        fixForecastDates();
-        // 2) Completa con datos reales Open-Meteo ECMWF (5 días)
-        try {
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&models=ecmwf_ifs025&forecast_days=5&timezone=auto`;
-          const res = await fetch(url);
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          const data = await res.json();
-          const D = data.daily;
-          if (!D || !D.time) return;
-          D.time.forEach((iso, i) => {
-            const card = document.querySelector(`#forecastGrid .forecast-day[data-day="${i}"]`);
-            if (!card) return;
-            const w = wmoToSpanish(D.weather_code[i]);
-            const hi = Math.round(D.temperature_2m_max[i]);
-            const lo = Math.round(D.temperature_2m_min[i]);
-            const label = card.querySelector('.forecast-date');
-            const icon = card.querySelector('.forecast-icon');
-            const elHi = card.querySelector('.forecast-temp-high');
-            const elLo = card.querySelector('.forecast-temp-low');
-            const elDesc = card.querySelector('.forecast-desc');
-            if (label) label.textContent = forecastLabelFor(i);
-            if (icon) icon.innerHTML = forecastIcon44(w.key);
-            if (elHi) elHi.textContent = hi + '°';
-            if (elLo) elLo.textContent = lo + '°';
-            if (elDesc) elDesc.textContent = w.label;
-          });
-        } catch (e) {
-          console.error('Error al cargar pronóstico diario:', e);
-        }
-      }
-
-      async function loadWeather(){
-        let data = null;
-        const urls = [
-          `/api/weather?city=${encodeURIComponent(CITY)}`,
-          `/weather.json?city=${encodeURIComponent(CITY)}`
-        ];
-        for (const url of urls){
-          try {
-            const r = await fetch(url, {cache:'no-store'});
-            if (r.ok){ data = await r.json(); break; }
-          } catch(_){}
         }
 
-        if (data && typeof data === 'object'){
-          const t   = data.temp ?? data.temperature ?? data.temp_c ?? null;
-          const f   = data.feels_like ?? data.feels ?? null;
-          const h   = data.humidity ?? data.hum ?? null;
-          const w   = data.wind ?? data.wind_speed ?? data.speed ?? null;
-          const wd  = data.wind_deg ?? data.wind_direction ?? data.deg ?? null;
-          const g   = data.gust ?? data.gusts ?? data.wind_gust ?? null;
-          const uv  = data.uvi ?? data.uv ?? data.uv_index ?? null;
-          const pr  = data.pressure ?? data.pres ?? null;
-          const vs  = data.visibility ?? data.vis ?? null;
-          const cl  = data.clouds ?? data.cloud ?? null;
-          const pp  = data.precipitation_probability ?? data.pop ?? data.precip_prob ?? null;
-          const dp  = data.dew_point ?? data.dew ?? null;
-          const c   = data.condition ?? data.description ?? data.weather ?? null;
-          const sr  = data.sunrise ?? null;
-          const ss  = data.sunset ?? null;
-          const aqi = data.aqi ?? data.air_quality ?? null;
-          const pm25= data.pm25 ?? data.pm2_5 ?? null;
-          const pm10= data.pm10 ?? null;
-          const co  = data.co ?? null;
-          const no2 = data.no2 ?? null;
-          const o3  = data.o3 ?? null;
-          const so2 = data.so2 ?? null;
-          const alerts = data.alerts ?? data.warnings ?? null;
+        function bindSearch() {
+            const input = $('.sidebar-search input');
+            if (!input) return;
+            input.addEventListener('input', () => {
+                const q = input.value.trim().toLowerCase();
+                $$('.loc-card').forEach(card => {
+                    card.style.display = !q || card.dataset.city.toLowerCase().includes(q) ? '' : 'none';
+                });
+            });
+        }
 
-          elTemp.textContent        = t   != null ? t   + '°C' : '--°C';
-          elFeels.textContent      = f   != null ? f   + '°'  : '--°';
-          elHumidity.textContent   = h   != null ? h   + '%'  : '--%';
-          elWind.textContent       = w   != null ? w   + ' km/h' : '-- km/h';
-          elWindDir.textContent    = getWindDir(wd);
-          elGusts.textContent      = g   != null ? g   + ' km/h' : '-- km/h';
-          elUV.textContent         = uv  != null ? String(uv)  : '--';
-          elPressure.textContent   = pr  != null ? pr  + ' hPa' : '-- hPa';
-          elVisibility.textContent = vs  != null ? vs  + ' km'  : '-- km';
-          elClouds.textContent     = cl  != null ? cl  + '%'  : '--%';
-          elPrecip.textContent     = pp  != null ? pp  + '%'  : '--%';
-          elDew.textContent        = dp  != null ? dp  + '°'  : '--°';
-          if (c) elCondition.textContent = c;
-
-          if (sr) elSunrise.textContent = new Date(sr * 1000).toLocaleTimeString('es-AR', {hour:'2-digit', minute:'2-digit'});
-          if (ss) elSunset.textContent  = new Date(ss * 1000).toLocaleTimeString('es-AR', {hour:'2-digit', minute:'2-digit'});
-          if (sr && ss) elSunHours.textContent = calcSunHours(sr, ss);
-
-          const level = getAqiLevel(aqi);
-          if (level){
-            elAqiValue.textContent = aqi;
-            elAqiStatus.textContent = level.label;
-            elAqiBadge.style.color = level.color;
-            elAqiBadge.style.background = level.bg;
-            elAqiBadge.style.borderColor = level.color + '55';
-          }
-          if (pm25 != null) elPm25.textContent = pm25 + ' µg/m³';
-          if (pm10 != null) elPm10.textContent = pm10 + ' µg/m³';
-          if (co  != null) elCo.textContent   = co  + ' ppm';
-          if (no2 != null) elNo2.textContent  = no2 + ' ppb';
-          if (o3  != null) elO3.textContent   = o3  + ' ppb';
-          if (so2 != null) elSo2.textContent  = so2 + ' ppb';
-
-          const condStr = String(c || '').toLowerCase();
-          if (data.rain || data.precipitation > 0 || condStr.includes('lluv') || condStr.includes('rain')) {
-            elRain.style.display = 'block'; elSnow.style.display = 'none';
-          } else if (data.snow || condStr.includes('nieve') || condStr.includes('snow')) {
-            elRain.style.display = 'none';  elSnow.style.display = 'block';
-          }
-
-          if (alerts) renderAlerts(alerts);
-        } else {
-          const MOCK = {
-            'Córdoba, Argentina': {
-              temp: 26, feels_like: 25, humidity: 65, wind: 12, wind_deg: 135, gust: 22,
-              uv: 7, pressure: 1013, visibility: 10, clouds: 42, precip_prob: 35,
-              dew_point: 18, condition: 'Parcialmente nublado', rain: true,
-              sunrise: 7.42, sunset: 19.15,
-              aqi: 38, pm25: 12.4, pm10: 28.1, co: 0.3, no2: 15.6, o3: 42, so2: 5,
-              alerts: [
-                { event: 'Aviso de tormentas', description: 'Se esperan tormentas aisladas para el jueves. Precaución en actividades al aire libre.', severity: 'moderate', expires: Math.floor(Date.now()/1000) + 172800 }
-              ]
+        function bindNotification() {
+            const close = $('.notif-close');
+            const notification = $('.sidebar-notification');
+            if (close && notification) {
+                close.addEventListener('click', () => {
+                    notification.style.display = 'none';
+                });
             }
-          };
-          const m = MOCK[CITY] || MOCK['Córdoba, Argentina'];
-          elTemp.textContent       = m.temp + '°C';
-          elFeels.textContent      = m.feels_like + '°';
-          elHumidity.textContent   = m.humidity + '%';
-          elWind.textContent        = m.wind + ' km/h';
-          elWindDir.textContent     = getWindDir(m.wind_deg);
-          elGusts.textContent      = m.gust + ' km/h';
-          elUV.textContent         = String(m.uv);
-          elPressure.textContent   = m.pressure + ' hPa';
-          elVisibility.textContent = m.visibility + ' km';
-          elClouds.textContent     = m.clouds + '%';
-          elPrecip.textContent     = m.precip_prob + '%';
-          elDew.textContent        = m.dew_point + '°';
-          elCondition.textContent  = m.condition;
-
-          elSunrise.textContent = formatHrs(m.sunrise);
-          elSunset.textContent  = formatHrs(m.sunset);
-          elSunHours.textContent = calcHrs(m.sunrise, m.sunset);
-
-          const level = getAqiLevel(m.aqi);
-          if (level){
-            elAqiValue.textContent = m.aqi;
-            elAqiStatus.textContent = level.label;
-            elAqiBadge.style.color = level.color;
-            elAqiBadge.style.background = level.bg;
-            elAqiBadge.style.borderColor = level.color + '55';
-          }
-          elPm25.textContent = m.pm25 + ' µg/m³';
-          elPm10.textContent = m.pm10 + ' µg/m³';
-          elCo.textContent   = m.co  + ' ppm';
-          elNo2.textContent  = m.no2 + ' ppb';
-          elO3.textContent   = m.o3  + ' ppb';
-          elSo2.textContent  = m.so2 + ' ppb';
-
-          if (m.rain) { elRain.style.display = 'block'; elSnow.style.display = 'none'; }
-          if (m.alerts) renderAlerts(m.alerts);
+            const btn = $('.notif-btn');
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const msg = document.createElement('div');
+                    msg.className = 'system-toast';
+                    msg.textContent = 'Abre Preferencias del Sistema para agregar Clima a la barra de menús.';
+                    document.body.appendChild(msg);
+                    setTimeout(() => msg.remove(), 3500);
+                });
+            }
         }
-      }
 
-      loadWeather();
-      buildHourlyScroll();
-      getForecast();
-      loadDailyForecast();
+        function buildExtendedData(forecast) {
+            const daily = forecast.daily;
+            const hourly = forecast.hourly;
+            const now = new Date();
+            const startIdx = hourly.time.findIndex(t => new Date(t) >= now);
+            const safeStart = startIdx === -1 ? 0 : startIdx;
+            const next24 = Array.from({ length: 24 }, (_, i) => safeStart + i).filter(i => i < hourly.time.length);
+
+            buildChart(hourly, next24);
+            buildHourlyTable(hourly, next24);
+            buildHourlyScroll(hourly, next24);
+            buildDayTabs(daily);
+            buildForecastGrid(daily);
+            const status = $('#extendedStatus');
+            if (status) status.textContent = 'Datos actualizados con Open-Meteo.';
+        }
+
+        function buildChart(hourly, indexes) {
+            const canvas = $('#tempChart');
+            if (!canvas) return;
+            if (chart) { chart.destroy(); chart = null; }
+            chart = new Chart(canvas.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: indexes.map(i => formatHour(hourly.time[i])),
+                    datasets: [
+                        {
+                            label: 'Temperatura',
+                            data: indexes.map(i => hourly.temperature_2m[i]),
+                            borderColor: '#60a5fa',
+                            backgroundColor: 'rgba(96,165,250,.12)',
+                            borderWidth: 2,
+                            pointRadius: 2,
+                            fill: true,
+                            tension: 0.35
+                        },
+                        {
+                            label: 'Sensación',
+                            data: indexes.map(i => hourly.apparent_temperature[i]),
+                            borderColor: '#fb923c',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 3],
+                            pointRadius: 0,
+                            tension: 0.35
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,.12)' } },
+                        y: { ticks: { color: '#94a3b8', callback: v => v + '°' }, grid: { color: 'rgba(148,163,184,.12)' } }
+                    }
+                }
+            });
+        }
+
+        function buildHourlyTable(hourly, indexes) {
+            const tbody = $('#hourlyTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = indexes.map(i => {
+                const info = wmoToSpanish(hourly.weather_code[i]);
+                return `<tr>
+                    <td>${formatHour(hourly.time[i])}</td>
+                    <td><span class="tbl-icon">${info.icon}</span></td>
+                    <td>${Math.round(hourly.temperature_2m[i])}°</td>
+                    <td>${Math.round(hourly.apparent_temperature[i])}°</td>
+                    <td>${Math.round(hourly.relative_humidity_2m[i])}%</td>
+                    <td>${Math.round(hourly.wind_speed_10m[i])} km/h</td>
+                    <td>${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
+                    <td>${Math.round(hourly.cloud_cover[i] || 0)}%</td>
+                    <td>${Math.round(hourly.pressure_msl[i])} hPa</td>
+                </tr>`;
+            }).join('');
+        }
+
+        function buildHourlyScroll(hourly, indexes) {
+            const track = $('#hourlyTrack');
+            if (!track) return;
+            track.innerHTML = indexes.map(i => {
+                const info = wmoToSpanish(hourly.weather_code[i]);
+                return `<div class="hourly-item">
+                    <p class="hourly-time">${i === indexes[0] ? 'Ahora' : formatHour(hourly.time[i])}</p>
+                    <div class="hourly-icon">${info.icon}</div>
+                    <p class="hourly-temp">${Math.round(hourly.temperature_2m[i])}°</p>
+                    <p class="hourly-desc">${info.label}</p>
+                </div>`;
+            }).join('');
+        }
+
+        function buildDayTabs(daily) {
+            const tabs = $('#dayTabs');
+            if (!tabs) return;
+            extendedDays = daily.time.slice(0, 3);
+            tabs.innerHTML = extendedDays.map((date, i) => {
+                const { name, num } = formatDayLabel(date, i);
+                return `<button class="day-tab${i === selectedDay ? ' active' : ''}" role="tab" data-day="${i}">
+                    <span class="day-tab-name">${name}</span>
+                    <span class="day-tab-date">${num}</span>
+                    <span class="day-tab-temp">${Math.round(daily.temperature_2m_max[i])}° / ${Math.round(daily.temperature_2m_min[i])}°</span>
+                </button>`;
+            }).join('');
+            tabs.querySelectorAll('.day-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedDay = Number(btn.dataset.day);
+                    buildDayTabs(daily);
+                    renderExtendedTable();
+                });
+            });
+        }
+
+        function renderExtendedTable() {
+            const tbody = $('#extendedTableBody');
+            const daily = extendedDays.length ? null : null;
+            if (!tbody || !extendedDays.length) return;
+            const status = $('#extendedStatus');
+            const date = extendedDays[selectedDay];
+            const forecast = window.__latestForecast;
+            if (!forecast) return;
+            const hourly = forecast.hourly;
+            const dayHours = hourly.time.map((t, i) => ({ t, i })).filter(item => item.t.startsWith(date));
+            tbody.innerHTML = dayHours.map(({ i }) => {
+                const info = wmoToSpanish(hourly.weather_code[i]);
+                return `<tr>
+                    <td>${formatHour(hourly.time[i])}</td>
+                    <td><span class="tbl-icon">${info.icon}</span></td>
+                    <td>${Math.round(hourly.temperature_2m[i])}°</td>
+                    <td>${Math.round(hourly.apparent_temperature[i])}°</td>
+                    <td>${Math.round(hourly.relative_humidity_2m[i])}%</td>
+                    <td>${Math.round(hourly.wind_speed_10m[i])} km/h</td>
+                    <td>${Math.round(hourly.precipitation_probability[i] || 0)}%</td>
+                    <td>${(hourly.precipitation?.[i] ?? 0).toFixed(1)} mm</td>
+                    <td>${Math.round(hourly.cloud_cover[i] || 0)}%</td>
+                    <td>${Math.round(hourly.pressure_msl[i])} hPa</td>
+                </tr>`;
+            }).join('');
+            if (status) status.textContent = `${formatDayLabel(date, selectedDay).name} · 24 horas · Open-Meteo`;
+        }
+
+        function buildForecastGrid(daily) {
+            const grid = $('#forecastGrid');
+            if (!grid) return;
+            grid.innerHTML = daily.time.slice(0, 5).map((date, i) => {
+                const info = wmoToSpanish(daily.weather_code[i]);
+                const { name, num } = formatDayLabel(date, i);
+                return `<div class="forecast-day">
+                    <p class="forecast-date">${name} ${num}</p>
+                    <div class="forecast-icon">${info.icon}</div>
+                    <p class="forecast-temp-high">${Math.round(daily.temperature_2m_max[i])}°</p>
+                    <p class="forecast-temp-low">${Math.round(daily.temperature_2m_min[i])}°</p>
+                    <p class="forecast-desc">${info.label}</p>
+                </div>`;
+            }).join('');
+        }
+
+        function bindExtendedToggle() {
+            const toggle = $('#toggleExtended');
+            const close = $('#closeExtended');
+            const section = $('#extendedData');
+            if (!toggle || !section) return;
+            toggle.addEventListener('click', () => {
+                section.hidden = false;
+                toggle.textContent = 'Ocultar datos extendidos';
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            if (close) {
+                close.addEventListener('click', () => {
+                    section.hidden = true;
+                    if (toggle) toggle.textContent = 'Mostrar datos extendidos';
+                });
+            }
+        }
+
+        window.__latestForecast = null;
+        const originalBuildExtendedData = buildExtendedData;
+        buildExtendedData = function(forecast) {
+            window.__latestForecast = forecast;
+            originalBuildExtendedData(forecast);
+        };
+
+        bindLocationCards();
+        bindSearch();
+        bindNotification();
+        bindExtendedToggle();
+        loadWeather('Córdoba');
     })();
     </script>
 </body>
